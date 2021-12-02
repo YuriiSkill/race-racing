@@ -21,6 +21,7 @@ const score = document.querySelector('.score'),
         ArrowRight:false,
         ArrowLeft:false
       };
+      
       const setting = {
         start:false,
         score:0,
@@ -30,15 +31,39 @@ const score = document.querySelector('.score'),
       function startGame(){
         start.classList.add('hide');
         setting.start = true;
+        
         gameArea.appendChild(car);
+        setting.x = car.offsetLeft;
+        setting.y = car.offsetTop;
         requestAnimationFrame(playGame);
       }
 
        function playGame(){
         console.log('play game!');
-        if(setting.start ===true)
-        requestAnimationFrame(playGame);
+        if(setting.start ===true){
+        if(keys.ArrowLeft===true){
+          // setting.x = setting.x - setting.speed;
+          setting.x-= setting.speed;
+        }
+        if(keys.ArrowRight===true){
+          setting.x += setting.speed;
+        }
 
+         if(keys.ArrowUp===true){
+          setting.x += setting.speed;
+        }
+
+        if(keys.ArrowDown===true){
+          setting.y -= setting.speed;
+        }
+
+       
+
+
+        car.style.left = setting.x + 'px';
+        car.style.top = setting.y + 'px';
+        requestAnimationFrame(playGame);
+        }
       }
 
 
